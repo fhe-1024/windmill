@@ -17,4 +17,10 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 		ctx.close();
 	}
 
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+		ctx.writeAndFlush("hello");
+	}
+
 }

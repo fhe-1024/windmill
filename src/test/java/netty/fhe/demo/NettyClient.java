@@ -1,7 +1,9 @@
 package netty.fhe.demo;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -9,7 +11,7 @@ import netty.fhe.demo.codec.TimeStampDecoder;
 import netty.fhe.demo.codec.TimeStampEncoder;
 
 public class NettyClient {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 		Bootstrap b = new Bootstrap();
 		b.group(workerGroup);
@@ -24,6 +26,7 @@ public class NettyClient {
 
 		});
 		String serverIp = "localhost";
-		b.connect(serverIp, 19000);
+		ChannelFuture future = b.connect(serverIp, 19000).sync();
+		future.channel().writeAndFlush("helloworld");
 	}
 }

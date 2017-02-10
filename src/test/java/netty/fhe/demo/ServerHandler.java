@@ -10,9 +10,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(msg.toString());
 		LoopBackTimeStamp ts = (LoopBackTimeStamp) msg;
 		ts.setRecvTimeStamp(System.nanoTime());
 		System.out.println("loop delay in ms:" + 1.0 * ts.timeLapseinNanoSecond() / 1000000L);
+//		ctx.writeAndFlush(msg);
 	}
 
 	@Override
