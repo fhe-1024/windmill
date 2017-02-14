@@ -1,212 +1,99 @@
 <%@page language="java" pageEncoding="utf-8"%>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>海外服务器托管/租用-云主机-云/IDC专线接入-MLINK-全球智能IDC一体化综合服务</title>
-<meta name="keywords"
-	content="全球IDC机房、全球IDC服务器、IDC服务提供商、海外服务器租用、海外服务器托管、带宽租用">
-<meta name="description"
-	content="MLINK致力于为国内企业提供香港、美国、新加坡、泰国等海内外服务器托管/租用、云主机、云/IDC专线接入以及防DDoS攻击等产品服务。跨国经验，质优价低，快速部署，7*24小时中英文客服支持。咨询热线：4001053626。">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>WeUI</title>
 <%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath();
 %>
-<link href="<%=path %>/resources/web/style/common.css" rel="stylesheet"
-	type="text/css">
-<link href="<%=path %>/resources/web/style/index.css" rel="stylesheet"
-	type="text/css">
-<link rel="shortcut  icon" type="image/x-icon"
-	href="<%=path %>/resources/web/images/favicon.ico" media="screen" />
-<script language="javascript" src="<%=path %>/resources/web/js/jquery-1.8.3.min.js"></script>
-<script language="javascript" src="<%=path %>/resources/web/js/header.js"></script>
-<script>
-	$(function() {
-		$(".businesstypelist_b").hover(function() {
-			$(this).css('background-color', '#f4f4f4');
-		}, function() {
-			$(this).css('background-color', '');
-		})
-
-		//首页幻灯片
-		var $imgrolls = $(".bannerblock");
-		var len = $imgrolls.length;
-		var index = 0;
-		var adTimer = null;
-		$imgrolls.mouseover(function() {
-			index = $imgrolls.index(this);
-			showImg(index);
-		}).eq(0).mouseover();
-		//滑入 停止动画，滑出开始动画.
-		$('.bannerlist').hover(function() {
-			if (adTimer) {
-				clearInterval(adTimer);
-			}
-		}, function() {
-			adTimer = setInterval(function() {
-				showImg(index);
-				index++;
-				if (index == len) {
-					index = 0;
-				}
-			}, 5000);
-		}).trigger("mouseleave");
-
-	});
-
-	function showImg(index) {
-		var $bannerdot = $(".bannerdot");
-		var $rolllist = $bannerdot.find(".bannerdotblock");
-		$(".bannerlist").find(".bannerblock").eq(index).stop(true, true)
-				.fadeIn(1500).siblings().fadeOut(1000);
-		$rolllist.removeClass("active").css("opacity", "0.3").eq(index)
-				.addClass("active").css("opacity", "1");
-	}
-</script>
+<!-- 引入 WeUI -->
+<link rel="stylesheet"
+	href="https://res.wx.qq.com/open/libs/weui/1.1.1/weui.min.css" />
+<script language="javascript" src="<%=path%>/resources/web/js/jquery-1.8.3.min.js"></script>	
 </head>
-
 <body>
-	<!--------首页banner--------->
-	<div class="banner">
-		<!--------导航--------->
-		<%@include file="head.jsp"%>
-		<div class="bannerlist  pagewidth">
-			<div class="bannerblock bannerpic01">
-				<div class="bannerblockcontent">
-					<div class="bannertext">
-						全球网络无缝连接<br>一体化综合服务
-					</div>
+	<div class="weui-panel weui-panel_access">
+		<div class="weui-panel__hd">图文组合列表</div>
+		<div class="weui-panel__bd">
+			<a href="javascript:void(0);"
+				class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img class="weui-media-box__thumb"
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg=="
+						alt="">
 				</div>
-			</div>
-			<div class="bannerblock bannerpic02">
-				<div class="bannerblockcontent">
-					<div class="bannertext">全球互联 灵活部署</div>
+				<div class="weui-media-box__bd">
+					<h4 class="weui-media-box__title">标题一</h4>
+					<p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
 				</div>
-			</div>
-			<div class="bannerblock bannerpic03" style="display: block">
-				<div class="bannerblockcontent">
-					<div class="bannertext">体验卓越 共创未来</div>
+			</a> <a href="javascript:void(0);"
+				class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img class="weui-media-box__thumb"
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg=="
+						alt="">
 				</div>
-			</div>
-
-
-
+				<div class="weui-media-box__bd">
+					<h4 class="weui-media-box__title">标题二</h4>
+					<p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+				</div>
+			</a>
 		</div>
-		<div class="bannerdot">
-			<div class="bannerdotblock active"></div>
-			<div class="bannerdotblock"></div>
-			<div class="bannerdotblock"></div>
-		</div>
-		<div class="intrtext">丰富的海内外顶级数据中心资源为企业网络的高速互联提供高端专业的数据传输和高速接入服务。通过一站式的综合解决方案，企业能够实现全球业务的快速扩张和稳定运作。</div>
-	</div>
-	<!------业务体系------->
-	<div class="businesstype">
-		<div class="pagewidth">
-			<h1>业务体系</h1>
-			<div class="businesstypelist">
-				<div class="businesstypelist_b"
-					onclick="javascript:window.location.href='wholeworld/index'">
-					<div class="businesstypelist_b_p b_b_p_icon01"></div>
-					<div class="businesstypelist_b_t">
-						<h3>主机托管</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>全球节点覆盖</em> <em>按需规划定制</em> <em>设备高效部署</em>
-						</div>
-					</div>
-				</div>
-				<div class="businesstypelist_b add_w"
-					onclick="javascript:window.location.href='renthost/index'">
-					<div class="businesstypelist_b_p b_b_p_icon02"></div>
-					<div class="businesstypelist_b_t">
-						<h3>主机租用</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>国内外知名设备厂商</em> <em>定制化的租用服务</em> <em>解决企业采购烦恼</em>
-						</div>
-					</div>
-				</div>
-				<div class="businesstypelist_b"
-					onclick="javascript:window.location.href='cloudrent/index'">
-					<div class="businesstypelist_b_p b_b_p_icon03"></div>
-					<div class="businesstypelist_b_t">
-						<h3>云主机</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>即时开通</em> <em>自主操作</em> <em>按需付费</em>
-						</div>
-					</div>
-				</div>
-				<div class="businesstypelist_b"
-					onclick="javascript:window.location.href='wholeworld/index'">
-					<div class="businesstypelist_b_p b_b_p_icon04"></div>
-					<div class="businesstypelist_b_t">
-						<h3>带宽租用</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>1.4T总带宽容量</em> <em>质优价更低</em> <em>核心骨干网多线接入</em>
-						</div>
-					</div>
-				</div>
-				<div class="businesstypelist_b add_w"
-					onclick="javascript:window.location.href='sdn/index'">
-					<div class="businesstypelist_b_p b_b_p_icon05"></div>
-					<div class="businesstypelist_b_t">
-						<h3>SDN专线</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>即时开通，即用即付 </em><em>无缝连接阿里云和AWS</em> <em>低价高效，安全稳定</em>
-						</div>
-					</div>
-				</div>
-				<div class="businesstypelist_b"
-					onclick="javascript:window.location.href='ddos/index'">
-					<div class="businesstypelist_b_p b_b_p_icon06"></div>
-					<div class="businesstypelist_b_t">
-						<h3>防DDoS 攻击</h3>
-						<div class="businesstypelist_b_t_list">
-							<em>全面智能防护 </em><em>最高的准确率</em> <em>灵活部署和扩展</em>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="weui-panel__ft">
+			<a href="javascript:void(0);"
+				class="weui-cell weui-cell_access weui-cell_link">
+				<div class="weui-cell__bd">查看更多</div> <span class="weui-cell__ft"></span>
+			</a>
 		</div>
 	</div>
-	<!--------产品优势------->
-	<div class="index_advantage">
-		<div class="pagewidth">
-			<h1>产品优势</h1>
-			<div class="index_advantage_list">
-				<div class="index_advantage_list_b">
-					<div class="index_a_l_b_icon index_a_l_b_icon01"></div>
-					<h3>更高级的数据中心</h3>
-					<div class="index_a_l_b_t">
-						全球50+顶级数据中心<br> 运营商网络中立<br> 海量带宽，高速低 价<br>
-						安全可靠、灵活部署
-					</div>
-				</div>
-				<div class="index_advantage_list_b">
-					<div class="index_a_l_b_icon index_a_l_b_icon02"></div>
-					<h3>更全面的增值服务</h3>
-					<div class="index_a_l_b_t">
-						数据备份和迁移<br> 系统管理和网络监控<br> 负载均衡和DNS解析服务<br>
+	<script type="text/javascript">
+	 var laugh = function() {
+			return {
+				init : function(rows) {
+					 $.ajax({
+							url : '<%=path %>/laugh/getLaughList',
+							data : {"page":"1","rows":rows},
+							dataType : 'json',
+							async : false,
+							type : 'get',
+							success : function(json) {
+									var html="";
+									$.each(json.rows,function(i, obj) {
+										console.log(obj.tagid);
+										html+='<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">';
+										html+='<div class="weui-media-box__hd">';
+										html+='<img class="weui-media-box__thumb"';
+										html+='src="'+obj.headimgurl+'" alt="">';
+										html+='</div>';
+										html+='<div class="weui-media-box__bd">';
+										html+='<h4 class="weui-media-box__title">'+obj.nickname+'</h4>';
+										html+='<p class="weui-media-box__desc">'+obj.content+'</p>';
+										html+='</div>';
+										html+='</a>';
+									});
+									$('.weui-panel__bd').html(html);
+							}
+						});
+				}
+				
+				
+					 
+				};
+			}();	
+		
+			$(function() {
+					var pagenum=20;
+				laugh.init(pagenum);
+				$(".weui-cell__bd").click(function(){
+					pagenum=parseInt(pagenum)+20;
+					laugh.init(pagenum);
+				});
+			});
+	</script>
 
-						常规维护和故障排除
-					</div>
-				</div>
-				<div class="index_advantage_list_b">
-					<div class="index_a_l_b_icon index_a_l_b_icon03"></div>
-					<h3>更完善的全球服务</h3>
-					<div class="index_a_l_b_t">
-						7*24小时中英文客服<br> 海内外运营中心全天驻场<br> 本地化专业服务团队
-					</div>
-				</div>
-				<div class="index_advantage_list_b">
-					<div class="index_a_l_b_icon index_a_l_b_icon04"></div>
-					<h3>更强大的设备部署</h3>
-					<div class="index_a_l_b_t">
-						按需采购安装<br> 高度定制方案<br> 快速响应和配置
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<%@include file="foot.jsp"%>
 </body>
 </html>
