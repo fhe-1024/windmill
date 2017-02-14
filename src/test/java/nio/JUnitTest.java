@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 public class JUnitTest {
-	@Test
+
 	public void test() {
 		try {
 			FileInputStream is = new FileInputStream(new File("D:/搜狗高速下载/navicat注册机/使用说明.txt"));

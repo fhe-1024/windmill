@@ -39,10 +39,10 @@ public class DemoTest {
 		concurrentHashMap.put("test", "hello");
 		concurrentHashMap.put("formal", "world");
 		System.out.println(concurrentHashMap.get("formal"));
-		Iterator<Entry<String, Object>> it = concurrentHashMap.entrySet().iterator();
-		while (it.hasNext()) {
-			concurrentHashMap.remove(it.next().getKey());
-		}
+//		Iterator<Entry<String, Object>> it = concurrentHashMap.entrySet().iterator();
+//		while (it.hasNext()) {
+//			concurrentHashMap.remove(it.next().getKey());
+//		}
 	}
 
 	@Test
