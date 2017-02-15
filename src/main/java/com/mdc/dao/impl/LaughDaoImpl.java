@@ -122,4 +122,15 @@ public class LaughDaoImpl implements ILaughDao {
 				laugh.getContent(), laugh.getUp(), laugh.getDown(), laugh.getCreatetime());
 	}
 
+	@Override
+	public int countKateByTagid(String tagid) throws Exception {
+		// TODO Auto-generated method stub
+		StringBuilder countsb = new StringBuilder();
+		Map<String, Object> countMap = new HashMap<String, Object>();
+		countsb.append(" select count(id) from laugh where tagid=:tagid ");
+		countMap.put("tagid", tagid);
+		Integer total = this.namedJdbcTemplate.queryForObject(countsb.toString(), countMap, Integer.class);
+		return total;
+	}
+
 }

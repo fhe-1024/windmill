@@ -15,7 +15,8 @@ public class Task {
 	@Autowired
 	private ILaughService laughService;
 	
-	@Scheduled(cron = "0 0 10 * * ? ")
+	//@Scheduled(cron = "0 0 10 * * ? ")
+	@Scheduled(cron = "0 0/1 * * * ? ")
 	public void exchange() throws Exception {
 		Spider crawler = new Spider("crawl", true);
 		crawler.setThreads(50);

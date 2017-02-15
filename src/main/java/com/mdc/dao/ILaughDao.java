@@ -16,4 +16,6 @@ public interface ILaughDao {
 	public int delete(String id) throws Exception;
 
 	public int update(Laugh laugh) throws Exception;
+	
+	public int countKateByTagid(String tagid)throws Exception;
 }

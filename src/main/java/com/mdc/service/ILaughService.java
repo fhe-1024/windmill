@@ -18,4 +18,6 @@ public interface ILaughService {
 	public int update(Laugh laugh) throws Exception;
 	
 	public int Laugh()throws Exception;
+	
+	public int countKateByTagid(String tagid)throws Exception;
 }

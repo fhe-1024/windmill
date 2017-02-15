@@ -54,4 +54,10 @@ public class LaughServiceImpl implements ILaughService {
 		return 0;
 	}
 
+	@Override
+	public int countKateByTagid(String tagid) throws Exception {
+		// TODO Auto-generated method stub
+		return laughDao.countKateByTagid(tagid);
+	}
+
 }
