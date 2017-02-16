@@ -112,6 +112,8 @@
 			<value>queue2</value>
 		</constructor-arg>
 	</bean>
+	
+<!--  
 	<bean id="queueMessageListener" class="com.mdc.mq.QueueMessageListener"></bean>
 	
 	<bean id="jmsContainer"
@@ -120,7 +122,7 @@
 		<property name="destination" ref="queueDestination2"></property>
 		<property name="messageListener" ref="queueMessageListener"></property>
 	</bean>
-
+-->
 	<!-- 定义消息主题(Topic) -->
 	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
@@ -150,7 +152,7 @@
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="topicDestination" />
-		<property name="messageListener" ref="queueMessageListener" />
+		<property name="messageListener" ref="topicMessageListener" />
 	</bean>
 	
 </beans>

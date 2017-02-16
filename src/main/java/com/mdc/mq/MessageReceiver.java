@@ -17,15 +17,17 @@ public class MessageReceiver {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void receive(Destination destination) {
+	public String receive(Destination destination) {
 		TextMessage tm = (TextMessage) jmsTemplate.receive(destination);
-
+		String message = "";
 		try {
+			message = tm.getText();
 			System.out.println("从队列" + destination.toString() + "收到了消息" + tm.getText());
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return message;
 	}
 
 }

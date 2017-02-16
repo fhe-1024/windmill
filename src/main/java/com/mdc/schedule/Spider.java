@@ -2,13 +2,15 @@ package com.mdc.schedule;
 
 import java.lang.reflect.Method;
 
+import javax.jms.Destination;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
+import com.mdc.mq.MessageSender;
 import com.mdc.service.ILaughService;
 import com.mdc.util.SpringContextUtils;
 import com.mdc.view.Laugh;
@@ -65,6 +67,9 @@ public class Spider extends BreadthCrawler {
 	public void visit(Page page, CrawlDatums next) {
 		Elements elements = page.select("div#content-left>div");
 		ILaughService laughService = (ILaughService) SpringContextUtils.getBeanById("laughServiceImpl");
+		
+		MessageSender messageSender=(MessageSender)SpringContextUtils.getBeanById("messageSender");
+		Destination destination=(Destination)SpringContextUtils.getBeanById("queueDestination2");
 		for (int rank = 0; rank < elements.size(); rank++) {
 			Element e = elements.get(rank);
 			System.out.println("标签id:" + e.id().substring(11));
@@ -87,6 +92,7 @@ public class Spider extends BreadthCrawler {
 			try {
 				int count = laughService.countKateByTagid(laugh.getTagid());
 				if (count == 0) {
+					messageSender.sendMessage(destination, laugh.getContent());
 					laughService.save(laugh);
 				} else {
 					log.info("这条信息是重复的吆");

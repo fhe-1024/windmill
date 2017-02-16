@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>windmill Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -19,10 +19,10 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-	
-	
-	
+
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -127,17 +127,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -212,12 +212,20 @@
 			<artifactId>gson</artifactId>
 			<version>2.7</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 			<version>4.1.6.Final</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
